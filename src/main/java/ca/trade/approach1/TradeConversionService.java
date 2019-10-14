@@ -12,20 +12,19 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @Builder
-public class Service {
+public class TradeConversionService implements TradeService {
     private final Gson gson;
-    private final Converter converter;
+    private final TradeConverter tradeConverter;
 
     public void processTrade(String filepath) {
         TradeDefinition tradeDefinition = loadTradeFromFile(filepath);
-        AbstractTrade trade = converter.convertApiToData(tradeDefinition);
+        AbstractTrade trade = tradeConverter.convertApiToData(tradeDefinition);
         System.out.println("Trade processing: " + trade);
     }
 
     private TradeDefinition loadTradeFromFile(String filepath) {
         try (BufferedReader br = Files.newBufferedReader(Paths.get(filepath))) {
             return gson.fromJson(br, TradeDefinition.class);
-
         } catch (IOException ex) {
             throw new IncorrectInputDataException("Invalid data format by path: " + filepath, ex);
         }

@@ -1,6 +1,6 @@
 package ca.trade;
 
-import ca.trade.approach1.Converter;
+import ca.trade.approach1.TradeConverter;
 import ca.trade.approach1.model.api.TradeDefinition;
 import ca.trade.approach1.model.trade.AbstractTrade;
 import ca.trade.approach1.model.trade.FxSpotTrade;
@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 import static ca.trade.TradeTestFixture.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ConverterTest {
-    private Converter converter;
+class TradeConverterTest {
+    private TradeConverter tradeConverter;
 
     @BeforeEach
     void init() {
-        converter = new Converter();
+        tradeConverter = new TradeConverter();
     }
 
     @Test
@@ -24,7 +24,7 @@ class ConverterTest {
         TradeDefinition tradeDefinition = TRADE_1;
 
         // when
-        AbstractTrade abstractTrade = converter.convertApiToData(tradeDefinition);
+        AbstractTrade abstractTrade = tradeConverter.convertApiToData(tradeDefinition);
 
         // then
         assertEquals(TRADE_CLASS_1, abstractTrade.getClass());
@@ -37,7 +37,7 @@ class ConverterTest {
         TradeDefinition tradeDefinition = TRADE_1;
 
         // when
-        FxSpotTrade trade = (FxSpotTrade) converter.convertApiToData(tradeDefinition);
+        FxSpotTrade trade = (FxSpotTrade) tradeConverter.convertApiToData(tradeDefinition);
 
         // then
         assertEquals(TRADE_PRICE_1, trade.getPrice());

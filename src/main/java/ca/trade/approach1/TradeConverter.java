@@ -4,7 +4,7 @@ import ca.trade.approach1.exceptions.UnknownTradeTypeException;
 import ca.trade.approach1.model.api.TradeDefinition;
 import ca.trade.approach1.model.trade.*;
 
-public class Converter {
+public class TradeConverter {
     public AbstractTrade convertApiToData(TradeDefinition tradeDefinition) {
         int tradePrice = tradeDefinition.getPrice();
         switch (tradeDefinition.getType()) {
