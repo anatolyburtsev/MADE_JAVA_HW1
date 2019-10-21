@@ -1,4 +1,4 @@
-package ca.trade.approach1.model.trade;
+package ca.trade.approach1.trade;
 
 import lombok.NonNull;
 

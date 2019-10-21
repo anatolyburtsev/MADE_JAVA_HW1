@@ -1,6 +1,6 @@
-package ca.trade.approach2.model;
+package ca.trade.approach2;
 
-import ca.trade.approach1.model.trade.*;
+import ca.trade.approach1.trade.*;
 
 public enum TradeTypeEnhanced implements TradeCreator {
     FX_SPOT {

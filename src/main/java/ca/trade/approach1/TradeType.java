@@ -1,4 +1,4 @@
-package ca.trade.approach1.model;
+package ca.trade.approach1;
 
 public enum TradeType {
     FX_SPOT,

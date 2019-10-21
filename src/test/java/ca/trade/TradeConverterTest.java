@@ -1,30 +1,28 @@
 package ca.trade;
 
-import ca.trade.approach1.TradeConverter;
-import ca.trade.approach1.model.api.TradeDefinition;
-import ca.trade.approach1.model.trade.AbstractTrade;
-import ca.trade.approach1.model.trade.FxSpotTrade;
-import org.junit.jupiter.api.BeforeEach;
+import ca.trade.approach1.TradeType;
+import ca.trade.approach1.api.TradeDefinition;
+import ca.trade.approach1.trade.AbstractTrade;
+import ca.trade.approach1.trade.FxSpotTrade;
 import org.junit.jupiter.api.Test;
 
-import static ca.trade.TradeTestFixture.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TradeConverterTest {
-    private TradeConverter tradeConverter;
+    private static final TradeType TRADE_TYPE_1 = TradeType.FX_SPOT;
+    static final int TRADE_PRICE_1 = 543;
+    private static final TradeDefinition TRADE_1 = TradeDefinition.builder()
+            .price(TRADE_PRICE_1)
+            .type(TRADE_TYPE_1)
+            .build();
+    private static final Class<? extends AbstractTrade> TRADE_CLASS_1 = FxSpotTrade.class;
 
-    @BeforeEach
-    void init() {
-        tradeConverter = new TradeConverter();
-    }
-
-    @Test
     void testConvert_abstractValidData_success() {
         // given
         TradeDefinition tradeDefinition = TRADE_1;
 
         // when
-        AbstractTrade abstractTrade = tradeConverter.convertApiToData(tradeDefinition);
+        AbstractTrade abstractTrade = tradeDefinition.toTrade();
 
         // then
         assertEquals(TRADE_CLASS_1, abstractTrade.getClass());
@@ -37,7 +35,7 @@ class TradeConverterTest {
         TradeDefinition tradeDefinition = TRADE_1;
 
         // when
-        FxSpotTrade trade = (FxSpotTrade) tradeConverter.convertApiToData(tradeDefinition);
+        FxSpotTrade trade = (FxSpotTrade) tradeDefinition.toTrade();
 
         // then
         assertEquals(TRADE_PRICE_1, trade.getPrice());
